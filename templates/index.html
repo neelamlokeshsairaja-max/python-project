@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureBank | Bank Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>SecureBank</h2><p>Management System</p>
+    <nav>
+      <a href="#dashboard">Dashboard</a><a href="#customers">Customers</a>
+      <a href="#create-account">Create Account</a><a href="#transactions">Transactions</a>
+      <a href="#transfer">Fund Transfer</a><a href="#statement">Account Statement</a>
+      <a href="#interest">Interest Preview</a>
+    </nav>
+  </aside>
+  <main class="main-content">
+    <section id="dashboard">
+      <div class="page-heading"><div><h1>Banking Dashboard</h1>
+        <p>Manage your banking operations in one place.</p></div><span class="status">System Online</span></div>
+      <div class="dashboard-cards">
+        <div class="card"><p>Total Balance</p><h2 id="total-balance">₹0.00</h2></div>
+        <div class="card"><p>Total Customers</p><h2 id="total-customers">0</h2></div>
+        <div class="card"><p>Total Accounts</p><h2 id="total-accounts">0</h2></div>
+        <div class="card"><p>Business Transactions</p><h2 id="total-transactions">0</h2></div>
+      </div>
+    </section>
+    <section id="customers" class="panel">
+      <h2>Customer Registration</h2>
+      <form id="customer-form">
+        <label for="customer-name">Customer Name</label><input id="customer-name" type="text" required minlength="2">
+        <label for="customer-phone">Phone Number</label><input id="customer-phone" type="tel" pattern="[6-9][0-9]{9}" maxlength="10" required>
+        <label for="customer-email">Email Address</label><input id="customer-email" type="email" required>
+        <button type="submit">Register Customer</button>
+      </form><p id="message" class="message" role="status"></p>
+      <div id="customer-result"></div>
+    </section>
+    <section id="create-account" class="panel">
+      <h2>Create Bank Account</h2>
+      <form id="account-form">
+        <label for="account-customer-id">Customer ID</label><input id="account-customer-id" type="number" min="1" required>
+        <label for="account-number">Account Number</label><input id="account-number" type="text" required>
+        <label for="account-type">Account Type</label>
+        <select id="account-type" required><option value="">Select account type</option>
+          <option value="savings">Savings Account</option><option value="current">Current Account</option></select>
+        <label for="opening-balance">Opening Balance (₹)</label>
+        <input id="opening-balance" type="number" min="0" step="0.01" value="0" required>
+        <button type="submit">Create Account</button>
+      </form><p id="account-message" class="message" role="status"></p>
+    </section>
+    <section id="transactions" class="panel">
+      <h2>Deposit and Withdrawal</h2>
+      <form id="transaction-form">
+        <label for="transaction-account">Account Number</label><input id="transaction-account" type="text" required>
+        <label for="transaction-type">Transaction Type</label>
+        <select id="transaction-type" required><option value="">Select transaction</option>
+          <option value="deposit">Deposit</option><option value="withdraw">Withdraw</option></select>
+        <label for="transaction-amount">Amount (₹)</label>
+        <input id="transaction-amount" type="number" min="0.01" step="0.01" required>
+        <button type="submit">Process Transaction</button>
+      </form><p id="transaction-message" class="message" role="status"></p>
+    </section>
+    <section id="transfer" class="panel">
+      <h2>Fund Transfer</h2>
+      <form id="transfer-form">
+        <label for="sender-account">Sender Account</label><input id="sender-account" type="text" required>
+        <label for="receiver-account">Receiver Account</label><input id="receiver-account" type="text" required>
+        <label for="transfer-amount">Amount (₹)</label><input id="transfer-amount" type="number" min="0.01" step="0.01" required>
+        <button type="submit">Transfer Money</button>
+      </form><p id="transfer-message" class="message" role="status"></p>
+    </section>
+    <section id="statement" class="panel">
+      <h2>Account Statement</h2>
+      <form id="statement-form">
+        <label for="statement-account">Account Number</label><input id="statement-account" type="text" required>
+        <button type="submit">Show Statement</button>
+      </form><div id="statement-result" class="message" role="status"></div>
+    </section>
+    <section id="interest" class="panel">
+      <h2>Interest Calculation</h2>
+      <form id="interest-form">
+        <label for="interest-account">Account Number</label><input id="interest-account" type="text" required>
+        <button type="submit">Calculate Interest</button>
+      </form><p id="interest-result" class="message" role="status"></p>
+      <small>Interest is a preview only and is not added to the account balance.</small>
+    </section>
+    <footer><p>SecureBank Management System | Educational Project</p></footer>
+  </main>
+</body>
+</html>
